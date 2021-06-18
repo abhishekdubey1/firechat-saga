@@ -48,6 +48,10 @@ button:hover {
 	color: black;
 	text-decoration: underline;
 }
+.signin h6,
+.signup h6 {
+	font-size: 1.4rem;
+}
 .rooms-list {
 	display: flex;
 	flex-direction: column;
@@ -83,6 +87,12 @@ button:hover {
 .add-room button {
 	margin-left: 50px;
 	padding: 5px 15px;
+}
+.chat {
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 .chatroom {
 	width: -webkit-fill-available;
