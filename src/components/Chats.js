@@ -37,7 +37,9 @@ const ChatBox = (props) => {
 	return (
 		<div ref={ref} className={"chatbox " + chatBoxClass(props.class)}>
 			<div className={props.class}>
-				<p className="chatbox-msg-user">{props.email}</p>
+				<p className="chatbox-msg-user">
+					{props.class === "sent" ? "You" : props.email}
+				</p>
 				<p className="chatbox-msg">{props.message}</p>
 				<p className="chatbox-msg-time">
 					{new Date(props.timestamp).toLocaleTimeString()}

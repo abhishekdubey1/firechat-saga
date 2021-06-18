@@ -13,7 +13,7 @@ const Navbar = (props) => {
 								Rooms
 							</Link>
 						</li>
-					)}{" "}
+					)}
 					<li className="nav-item nav-item-msg">
 						<p>
 							Hey {props.email}!<br /> Welcome🎉🎉🥳
