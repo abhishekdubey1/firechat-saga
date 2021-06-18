@@ -14,10 +14,8 @@ const RoomsList = (props) => {
 		props.syncRoomsCollection();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	const createRoom = () => {
-		let room = prompt("Give a name for your room:");
-		if (room) props.addNewRoom(room);
+	const createRoom = (roomName, roomPwd) => {
+		if (roomName) props.addNewRoom(roomName, props.auth.user.email, roomPwd);
 	};
 
 	return (
@@ -29,10 +27,11 @@ const RoomsList = (props) => {
 				showRoomsBtn={false}
 			/>
 			<Chatrooms
-				loading={props.rooms.loadRooms}
-				rooms={props.rooms.allRooms}
 				createRoom={createRoom}
 				deleteRoom={props.deleteRoom}
+				email={props.auth.user.email}
+				loading={props.rooms.loadRooms}
+				rooms={props.rooms.allRooms}
 			/>
 		</main>
 	);
@@ -45,8 +44,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	syncRoomsCollection: () => dispatch(syncRoomsCollection()),
-	addNewRoom: (roomName) => dispatch(addNewRoom(roomName)),
-	deleteRoom: (id) => dispatch(deleteRoomStart(id)),
+	addNewRoom: (roomName, creator, roomPwd) =>
+		dispatch(addNewRoom(roomName, creator, roomPwd)),
+	deleteRoom: (id, user) => dispatch(deleteRoomStart(id, user)),
 	logoutUser: () => dispatch(logoutUser()),
 });
 

@@ -6,7 +6,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import ChatRoom from "./components/ChatRoom";
 import NotFound from "./components/NotFound";
 import "./styles.css";
+import { useEffect } from "react";
 export default function App() {
+	useEffect(() => {
+		// getRoom();
+	}, []);
 	return (
 		<div className="app">
 			<Router>

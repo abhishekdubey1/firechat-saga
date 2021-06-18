@@ -26,12 +26,15 @@ import {
 	setMessagessInStore,
 } from "./../actions/roomActions";
 
-const createRoomCollection = async (roomName) => {
+const createRoomCollection = async (roomName, creator, password) => {
 	const slug = slugify(roomName, { lower: true, strict: true });
+	alert(password);
 	return await db.collection("rooms").doc(slug).set({
 		name: roomName,
 		slug: slug,
 		timestamp: Date.now(),
+		creator,
+		password,
 	});
 };
 
@@ -40,8 +43,10 @@ const createMessageDocument = async (conversationId, email, message) => {
 		.collection(`rooms/${conversationId}/messages`)
 		.add({ email, message, timestamp: Date.now() });
 };
-
-const deleteRoomCollection = async (id) => {
+export const getRoomCreator = async (id) => {
+	return await db.collection("rooms").doc(id).get();
+};
+const deleteRoomCollection = async (id, user) => {
 	return await db.collection("rooms").doc(id).delete();
 };
 
@@ -66,11 +71,11 @@ export function* getRoomsSuccess({ querySelector }) {
 	yield put(setRoomsInStore(allRooms));
 }
 
-export function* createNewRoom({ roomName }) {
+export function* createNewRoom({ roomName, creator, roomPwd }) {
 	yield put(setRoomsLoading(true));
 
 	try {
-		yield call(createRoomCollection, roomName);
+		yield call(createRoomCollection, roomName, creator, roomPwd);
 		alert("Room Created Successfully");
 	} catch (error) {
 		console.error(error);
@@ -80,13 +85,23 @@ export function* createNewRoom({ roomName }) {
 	yield put(setRoomsLoading(false));
 }
 
-export function* deleteOldRoom({ id }) {
+export function* deleteOldRoom({ id, user }) {
 	yield put(setRoomsLoading(true));
 	yield put(setMessagesLoading(true));
 
 	try {
-		yield call(deleteRoomCollection, id);
-		alert("Room Deleted Successfully");
+		const doc = yield call(getRoomCreator, id);
+		if (doc.exists) {
+			const { creator } = doc.data();
+			if (creator === user) {
+				yield call(deleteRoomCollection, id, user);
+				alert("Room Deleted Successfully");
+			} else {
+				alert("You can't delete this room");
+			}
+		} else {
+			alert("No such document");
+		}
 	} catch (error) {
 		alert(error.message);
 		console.error(error);
