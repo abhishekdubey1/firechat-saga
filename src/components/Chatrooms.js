@@ -7,7 +7,7 @@ const Chatrooms = (props) => {
 	const [roomPwd, setRoomPwd] = useState("");
 	const [showInput, setShowInput] = useState(false);
 	const handleAddRoom = () => {
-		if (roomName && showInput) {
+		if (roomName && roomPwd && showInput) {
 			props.createRoom(roomName, roomPwd);
 			setRoomName("");
 			setRoomPwd("");
@@ -40,16 +40,23 @@ const Chatrooms = (props) => {
 							<input
 								value={roomName}
 								onChange={(e) => setRoomName(e.target.value)}
-								onKeyDown={handleKeyDown}
+								placeholder="Room Name"
+								className="input-room-name"
 							/>
-							{/* <input
+							<input
 								value={roomPwd}
 								onChange={(e) => setRoomPwd(e.target.value)}
 								onKeyDown={handleKeyDown}
-							/> */}
+								type="password"
+								placeholder="Room Password"
+								className="input-room-pwd"
+							/>
 						</>
 					)}
-					<button className="btn-add-room" onClick={handleAddRoom}>
+					<button
+						className={`btn-add-room ${showInput ? "mx-5" : ""}`}
+						onClick={handleAddRoom}
+					>
 						Add {!showInput && " a new Room"} <Emoji>😎</Emoji>
 					</button>
 				</div>

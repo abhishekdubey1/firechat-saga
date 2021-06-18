@@ -29,6 +29,8 @@ button:hover {
 	justify-content: center;
 	align-items: center;
 	height: max-content;
+	color: white;
+	background-image: url("https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
 }
 .signin,
 .signup {
@@ -85,14 +87,24 @@ button:hover {
 	margin: 10px 0px;
 	font-size: 2rem;
 }
-.btn-close-addinput {
-}
 .add-room {
 	display: flex;
+	align-items: baseline;
+}
+.input-room-pwd,
+.input-room-name {
+	line-height: 20px;
+}
+.input-room-pwd {
+	margin-right: 50px;
+	margin-left: 5px;
+}
+.input-room-name {
+	margin-left: 10px;
 }
 .btn-add-room {
-	margin-left: 50px;
 	padding: 5px 15px;
+	margin-top: 10px;
 }
 .chat {
 	min-height: 300px;

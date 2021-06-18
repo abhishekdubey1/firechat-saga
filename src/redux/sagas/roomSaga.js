@@ -26,13 +26,15 @@ import {
 	setMessagessInStore,
 } from "./../actions/roomActions";
 
-const createRoomCollection = async (roomName, creator) => {
+const createRoomCollection = async (roomName, creator, password) => {
 	const slug = slugify(roomName, { lower: true, strict: true });
+	alert(password);
 	return await db.collection("rooms").doc(slug).set({
 		name: roomName,
 		slug: slug,
 		timestamp: Date.now(),
 		creator,
+		password,
 	});
 };
 
@@ -41,8 +43,7 @@ const createMessageDocument = async (conversationId, email, message) => {
 		.collection(`rooms/${conversationId}/messages`)
 		.add({ email, message, timestamp: Date.now() });
 };
-
-const getRoomCreator = async (id) => {
+export const getRoomCreator = async (id) => {
 	return await db.collection("rooms").doc(id).get();
 };
 const deleteRoomCollection = async (id, user) => {
@@ -70,11 +71,11 @@ export function* getRoomsSuccess({ querySelector }) {
 	yield put(setRoomsInStore(allRooms));
 }
 
-export function* createNewRoom({ roomName, creator }) {
+export function* createNewRoom({ roomName, creator, roomPwd }) {
 	yield put(setRoomsLoading(true));
 
 	try {
-		yield call(createRoomCollection, roomName, creator);
+		yield call(createRoomCollection, roomName, creator, roomPwd);
 		alert("Room Created Successfully");
 	} catch (error) {
 		console.error(error);

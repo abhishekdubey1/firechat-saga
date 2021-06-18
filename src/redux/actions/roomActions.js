@@ -47,10 +47,11 @@ export const syncRoomFailure = (error) => ({
 	error,
 });
 
-export const addNewRoom = (roomName, creator) => ({
+export const addNewRoom = (roomName, creator, roomPwd) => ({
 	type: ADD_NEW_ROOM,
 	roomName,
 	creator,
+	roomPwd,
 });
 
 export const deleteRoomStart = (id, user) => ({
