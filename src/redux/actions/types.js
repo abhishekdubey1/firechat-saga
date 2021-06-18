@@ -14,7 +14,6 @@ export const SET_ROOMS = "SET_ROOMS";
 export const ADD_NEW_ROOM = "ADD_NEW_ROOM";
 
 export const DELETE_ROOM_START = "DELETE_ROOM_START";
-export const DELETE_ROOM = "DELETE_ROOM";
 
 export const SYNC_MESSAGES = "SYNC_MESSAGES";
 export const SYNC_MESSAGES_SUCCESS = "SYNC_MESSAGES_SUCCESS";

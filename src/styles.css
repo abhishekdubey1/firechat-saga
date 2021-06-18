@@ -78,13 +78,19 @@ button:hover {
 	letter-spacing: 1px;
 }
 
-.add-room {
+.chatrooms-main {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: stretch;
 	margin: 10px 0px;
 	font-size: 2rem;
 }
-.add-room button {
+.btn-close-addinput {
+}
+.add-room {
+	display: flex;
+}
+.btn-add-room {
 	margin-left: 50px;
 	padding: 5px 15px;
 }
