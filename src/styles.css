@@ -136,12 +136,15 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	background-color: rgb(13, 20, 24);
+	max-height: 70vh;
+	overflow-y: scroll;
 }
 .chatname {
 	text-align: center;
 	font-size: 2.5rem;
 	display: inline;
 	color: white;
+	margin: 20px 0px;
 }
 .chatname p {
 	border-bottom: 3px solid springgreen;
@@ -167,11 +170,13 @@ button:hover {
 	text-align: right;
 	background-color: blueviolet;
 	margin-right: 10px;
+	overflow-wrap: break-word;
 }
 .recieved {
 	text-align: left;
 	background-color: darkblue;
 	margin-left: 10px;
+	overflow-wrap: break-word;
 }
 .chatbox-msg {
 	font-size: 1.4rem;
